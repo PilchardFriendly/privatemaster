@@ -1,0 +1,25 @@
+#! /usr/bin/env ruby
+#arg 0 = exec name
+#arg 1 = hostname
+#output is a valid yaml file that looks something like:
+# ---
+# classes: [ntp, postfix]
+# parameters: {from_cobbler: 1, tree: 'http://@@http_server@@/cblr/links/centos5u4-x86_64'}
+
+fixture_path = '/usr/share/puppet.private/specs/fixtures'
+hostname = ARGV[0]
+
+begin
+  File.open("#{fixture_path}/#{hostname}.yml") do | f |
+    f.each_line { | l | puts l}
+  end
+rescue Exception => e
+  content = <<YAML
+classes: []
+parameters: {exception => "#{e}"}
+YAML
+  puts content
+end
+
+
+

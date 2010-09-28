@@ -1,0 +1,17 @@
+import "nodes"
+
+filebucket { 
+	main: server => <%= fqdn %> 
+}
+File { 
+	backup => main 
+}
+Exec { 
+	path => "/usr/bin:/usr/sbin/:/bin:/sbin:/usr/local/bin:/usr/local/sbin" 
+}
+
+node default {
+	#This is needed to allow external nodes to be defined.
+	#Both files and external script have to say SOMETHING about each node.	
+	#We currently remote use cobbler, and that always returns a blank yaml file for hosts it knows nothing about.
+}

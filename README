@@ -1,0 +1,15 @@
+A quick recipe for testing standalone puppet clients against a bootstrapped puppet master.
+
+This receipe sets up a private puppet master ready to run requests.  
+Locations:
+	/etc/puppet/private/
+	/var/run/puppet/private
+	/usr/share/puppet.private/system_test/manifests/spec-site.pp   #Define your default host in here
+	/usr/share/puppet.private/system_test/modules		       #Location of the modules to be tested
+	/usr/share/puppet.private/specs/fixtures/<scenario>	       #yaml file defining classes and properties for <hostname>
+	
+Run the client with at least the following arguments:
+ 	--server localhost --fqdn <scenario> --environment testing
+
+You can include this in specs or features...
+
